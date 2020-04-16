@@ -21,11 +21,13 @@ public class SMSReceiver extends BroadcastReceiver {
 //---get the SMS message passed in---
         Bundle bundle = intent.getExtras();
         SmsMessage[] msgs = null;
-        String str = "Isi SMS nya adalah ";
+        String str = "SMS from ";
         if (bundle != null) {
             msgs = Telephony.Sms.Intents.getMessagesFromIntent(intent);
 
             for (int i=0; i<msgs.length; i++){
+                str += msgs[i].getOriginatingAddress().toString();
+                str += ", The Message body is ";
                 str += msgs[i].getMessageBody().toString();
             }
 
